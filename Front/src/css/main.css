@@ -1,0 +1,363 @@
+@font-face {
+    font-family: "godom";
+    src: url(../fonts/NanumSquareRoundR.ttf);
+}
+
+:root {
+    --font-godom: "godom";
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-godom);
+}
+
+.all {
+    display: flex;
+    flex-flow: column;
+}
+
+.c-main-background {
+    transition: background-image 0.5s ease-in-out;
+    background-repeat: round;
+    background-size: contain;
+    height: 100vh;
+}
+
+
+/* 테스트 섹터 */
+#c-sector {
+    display: flex;
+    flex-flow: column;
+    gap: 100px;
+    padding: 175px 100px;
+}
+
+#c-sector .item {
+    display: flex;
+}
+
+figure {
+    margin: 0;
+}
+
+#c-sector .item .cont {
+    display: flex;
+    flex-flow: column;
+    width: 50%;
+    padding: 75px 5vw;
+}
+
+#c-sector .item .cont .intextinfo {
+    font-weight: 600;
+}
+
+#c-sector .item .img_box {
+    /* overflow: hidden; */
+    position: relative;
+}
+
+#c-sector .item .img_box img {
+    height: 40vh;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+/* 섹터박스 */
+#c-sector .item .cont .tit {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+    font-size: 3vw;
+    font-weight: 900;
+    line-height: 1;
+    color: #111;
+    filter: drop-shadow(1px 1px 1px #9c9c9c);
+}
+
+#c-sector .item .cont .tit span {
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 1.5vw;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#c-sector .item .cont div {
+    white-space: nowrap;
+    word-break: keep-all;
+    line-height: 1.8;
+    font-weight: 100;
+    font-size: 0.9vw;
+    text-align: left;
+    color: #777;
+}
+
+#c-sector .item .cont .abox {
+    text-decoration-line: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 180px;
+    height: 60px;
+    margin-top: 4vh;
+    border: 1px solid #e1e1e1;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+    line-height: 58px;
+    transition: all .4s;
+    white-space: nowarp;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #000;
+}
+
+#c-sector .item .cont .abox:hover {
+    border-color: transparent;
+    background-color: #0e819e;
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #000;
+}
+
+/* 타이틀 바 시작 */
+
+.title-border {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* position: absolute; */
+    top: 0px;
+    left: 0px;
+}
+
+.title-TextBox {
+    font-size: 4vw;
+    font-weight: 700;
+    margin-top: 17vw;
+    margin-left: 17vw;
+    text-align: left;
+    color: white;
+
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+.title-SubTextBox {
+    font-size: 1.3vw;
+    font-weight: 1;
+    margin-top: 1vw;
+    margin-left: 17vw;
+    line-height: 2vw;
+    text-align: left;
+    color: #dfdfdf;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+/* 타이틀 바 종료 */
+
+/* 타이틀 바 로고 */
+
+.c-titlelogo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    transition: 'transform 3s ease-in-out'
+}
+
+.c-titlelogo img {
+    transition: opacity 0.5s ease-in-out;
+    margin-top: 15vw;
+    margin-right: 13vw;
+    width: 23vw;
+    height: 23vw;
+}
+
+/* 타이틀 바 로고 종료 */
+
+.c-tabchange {
+    background: linear-gradient(0deg, white 0%, white 301px, rgba(255, 255, 255, 0) 100%);
+    position: absolute;
+    top: 43vw;
+    width: 100%;
+    height: 480px;
+    z-index: 1;
+}
+
+.c-tabchange2 {
+    background: linear-gradient(180deg, white 0%, white 301px, rgba(255, 255, 255, 0) 100%);
+    position: absolute;
+    top: 91vw;
+    width: 100%;
+    height: 480px;
+    z-index: 1;
+}
+
+/* 2번째 탭 부분 */
+.c-title-second-div {
+    z-index: 2;
+    /* height: 100vh; */
+    /* position: absolute; */
+    /* top: 100vh; */
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.c-title-second-box {
+    /* flex: 1 0 auto; */
+    color: black;
+    display: flex;
+    flex-direction: row;
+    font-size: 3vw;
+}
+
+.c-title-second-titlebar {
+    margin-top: 14vw;
+    margin-bottom: 4vw;
+}
+
+.c-title-second-box img {
+    /* flex: 1 0 auto; */
+    width: 8vw;
+}
+
+.c-title-second-textbox {
+    font-size: 1.5vw;
+    text-align: left;
+    margin-left: 5vw;
+    line-height: 2.3vw;
+    /* flex: 1 0 auto; */
+}
+
+maaa {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* 3번째 탭 부분 */
+.c-title-Thrid_BackGround {
+    /* position: absolute; */
+    height: 100vh;
+    width: 100%;
+    /* top: 200vh; */
+    background-image: url(../img/Univ_BackGround_01.png);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-repeat: round;
+    background-size: contain;
+}
+
+.c-title-Thrid-TitleBar {
+    background-color: white;
+    border-radius: 10px;
+    height: 9vh;
+    width: 40vw;
+    margin: 5vh 2vh 0.8vh;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.c-title-Thrid-TitleBar .text {
+    text-align: center;
+    justify-self: center;
+    align-items: center;
+
+    font-size: 3vh;
+    font-weight: bold;
+
+    line-height: 9vh;
+}
+
+.c-title-Thrid-Items {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.c-title-Thrid-Items a {
+    transition: all 0.2s;
+    text-decoration-line: none;
+    color: black !important;
+}
+
+.c-title-Thrid-Items a:hover {
+    color: white !important;
+}
+
+
+.c-title-Thrid_MiniBox {
+    background-color: white;
+    position: relative;
+    height: 64vh;
+    width: 27vw;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+
+    margin-top: 1vw;
+}
+
+.c-title-Thrid_MiniBox_More:hover {
+    background-color: #125B9F;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+.c-title-Thrid_MiniBox_More {
+
+    transition: all 0.2s;
+
+    background-color: white;
+    position: relative;
+    height: 30vh;
+    width: 27vw;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+}
+
+.c-title-Thrid_MiniBox_Item {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    height: 100%;
+}
+
+.c-title-Thrid_MiniBox_Item .title {
+    font-size: 2vw;
+    font-weight: bold;
+    margin-top: -0.5vw;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+}
+
+.c-title-Thrid_MiniBox_Item .description {
+    font-size: 1vw;
+    line-height: 1.5vw;
+    margin-top: 0.5vw;
+    white-space: nowrap;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+}
+
+.c-title-Thrid_MiniBox_Item img {
+    height: 4vw;
+    margin: 1vw;
+
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}

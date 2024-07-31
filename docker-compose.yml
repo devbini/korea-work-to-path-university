@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./Front
+    ports:
+      - "8080:3000"
+    container_name: frontend-container
+    env_file:
+      - /home/importent/.env
+
+  backend:
+    build:
+      context: ./Back
+    ports:
+      - "8081:8080"
+    container_name: backend-container
+    env_file:
+      - /home/importent/.env
