@@ -1,0 +1,181 @@
+.popup-overlay {
+    transition: all 0.5s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-mid-line {
+    border: #00000036 solid 1.5px;
+    width: 100%;
+}
+
+.popup {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 80vw;
+    height: 75vh;
+    z-index: 1001;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.popup-inner {
+    text-align: center;
+}
+
+.popup button {
+    margin-top: 10px;
+}
+
+
+/* TOP BOX 최상단 부분 */
+.popup-topbox {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.popup-topbox .top-background {
+    background-color: aqua;
+    border-radius: 10px 10px 0px 0px;
+    height: 12vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.popup-topbox .top-emblumBack {
+    border-radius: 10000px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    width: 13vh;
+    height: 13vh;
+    margin-top: -6vh;
+    align-content: center;
+}
+
+.popup-topbox .top-emblum {
+    width: 90%;
+    margin: auto;
+}
+
+.popup-topbox .top-titlebar {
+    margin-top: 1vh;
+    line-height: 3.4vh;
+}
+
+.popup-topbox .top-titlebar .top-title {
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.popup-topbox .top-titlebar .top-slogan {
+    font-size: 1.6vh;
+    font-weight: bold;
+    color: #777;
+}
+
+/* 중단 부분 */
+.popup-middlebox {
+    margin-top: 3vh;
+    display: flex;
+    flex-flow: row;
+    gap: 1vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.popup-middlebox .popup-titlebar-left {
+    text-align: left;
+    font-size: 2vh;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+    margin: 0.5vw 2vw;
+}
+
+.popup-middlebox .popup-titlebar-right {
+    text-align: left;
+    font-size: 2vh;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+    margin: 0.5vw 2vw;
+}
+
+
+
+
+.popup-middlebox .popup-middlebox-littlemini {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 30vw;
+    color: black;
+    text-decoration-line: none;
+    margin: 0.5vw 1vw;
+}
+
+.popup-middlebox .popup-middlebox-littlemini .middlebox-left {
+    width: 15%;
+    text-align: left;
+    line-height: 4vh;
+    font-size: 0.8vw;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.popup-middlebox .popup-middlebox-littlemini .middlebox-right {
+    width: 75%;
+    text-align: left;
+    font-size: 0.8vw;
+    font-weight: bold;
+    line-height: 4vh;
+    margin-left: 5%;
+}
+
+.popup-middlebox .popup-middlebox-littlemini .middlebox-right span a {
+    color: black;
+    text-decoration-line: none;
+}
+
+.kakaomap {
+    width: 90%;
+    height: 25vh;
+    border-radius: 10px;
+}
+
+/* 하단 부분 */
+.popup-bottom-box {
+    margin-top: 3vh;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.popup-bottom-box .popup-bot-line {
+    border: #00000036 solid 1.5px;
+    width: 78%;
+    height: 1px;
+}
+
+.popup-bottom-box .popup-titlebar {
+    text-align: center;
+    font-size: 2.5vh;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+}
+

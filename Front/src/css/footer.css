@@ -1,0 +1,47 @@
+/* Footer */
+footer {
+    z-index: 100;
+    /* position: absolute; */
+    width: 100%;
+    /* bottom: -200vh; */
+    display: flex;
+    flex-flow: column;
+    background-color:#242424;
+}
+
+.footer-title-message {
+    font-weight: 800;
+    font-size: 2vw;
+    margin: 1vw;
+    color: white;
+}
+
+.footer-message{
+    font-weight: 0;
+    font-size: .8vw;
+    line-height: 2.4vh;
+    color:white;
+    margin: 1vw;
+}
+
+.footer-icon {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+    justify-content: center;
+}
+
+.footer-icon img {
+    width: 30px;
+}
+
+.footer-contact{
+    font-size:0.9rem;
+    color:#545e6f;
+    margin:0.6rem;
+}
+.footer-copyright{
+    font-size:0.9rem;
+    color:white;
+    margin:0.6rem;
+}
