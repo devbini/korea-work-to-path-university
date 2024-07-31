@@ -11,7 +11,7 @@ import section3 from "../img/section3.png";
 
 import Navcomponent from "./header";
 import FooterComponent from "./footer";
-import Popup from "./school_Popup";
+import Popup from "./1-1_school_Popup.js";
 
 function Schoolcomponent() {
   const [universities, setUniversities] = useState([]);
