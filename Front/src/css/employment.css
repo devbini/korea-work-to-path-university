@@ -1,0 +1,164 @@
+.c-employment-root {
+    color: black;
+    display: flex;
+    flex-flow: column;
+}
+
+/* 타이틀 바 */
+.c-employment-titlebar {
+    width: 100%;
+    background-image: url('../img/Univ_BackGround_01.png');
+    backdrop-filter: blur(10px);
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+}
+
+.c-employment-titlebar .titlebox {
+    display: flex;
+    flex-flow: column;
+}
+
+.c-employment-titlebar .titlebox .title {
+    color: white;
+    font-size: 5vh;
+    margin: 15vh 0vh 0vh 0vh;
+    filter: drop-shadow(4px 4px 4px #000);
+}
+
+.c-employment-titlebar .titlebox .description {
+    color: white;
+    font-size: 3vh;
+    margin: 3vh 0vh 8vh 0vh;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+}
+
+/* 재직부 */
+.c-employment-middlebar {
+    display: flex;
+    flex-flow: column;
+    margin: 5vh;
+    padding: 0px 30vw;
+}
+
+.c-employment-middlebar .top {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-content: center;
+    margin-bottom: 4vh;
+}
+
+.c-employment-middlebar .top .title {
+    font-size: 3vh;
+    line-height: 5vh;
+}
+
+.c-employment-middlebar .top button {
+    background-color: #8398AE;
+    border: none;
+    color: white;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+    font-size: 0.8vw;
+    width: 8vw;
+    height: 5vh;
+    cursor: pointer;
+}
+
+.c-employment-middlebar .middle {
+    transition: all 0.5s;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    line-height: 5vh;
+    padding: 1%;
+    margin: 1%;
+    gap: 10px;
+}
+
+.c-employment-middlebar .selection {
+    box-shadow: 0px 0px 15px 0px rgba(255, 0, 0, 0.5);
+}
+
+.c-employment-middlebar .middle input {
+    width: 44%;
+    height: 5vh;
+    border-radius: 5px;
+    border: solid 0.5px #8398Ae;
+    text-align: center;
+    font-size: 2vh;
+}
+
+.c-employment-middlebar .middle button {
+    background-color: #8398AE;
+    border: none;
+    color: white;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+    font-size: 0.8vw;
+    width: 8vw;
+    height: 5vh;
+    margin: auto;
+    cursor: pointer;
+}
+
+#SUMDATE {
+    color: rgb(255, 174, 0);
+    font-size: 4vh;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+}
+
+.c-employment-middlebar .reset {
+    background-color: white;
+}
+
+.c-employment-middlebar .calc {
+    background-color: orange;
+}
+
+.c-employment-middlebar .bottom {
+    margin-top: 4vh;
+    display: flex;
+    flex-flow: row;
+    gap: 1vw;
+    justify-content: center;
+}
+
+.c-employment-middlebar .bottom button {
+    border: none;
+    color: black;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+    font-size: 0.8vw;
+    width: 8vw;
+    height: 5vh;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* 결과부 */
+.c-employment-fin {
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    justify-content: center;
+}
+
+.c-employment-fin .box {
+    background-color: #b1b1b1;
+    display: flex;
+    width: 90%;
+    height: 9vh;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.c-employment-fin .text {
+    font-weight: bold;
+    font-size: 3vh;
+    margin: 0px;
+    line-height: 9vh;
+}
+
+.c-employment-fin .number {
+    font-size: 5vh;
+    color: rgb(255, 187, 0);
+}

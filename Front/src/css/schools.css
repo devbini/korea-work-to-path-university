@@ -1,0 +1,177 @@
+.c-school-root {
+    color: black;
+    display: flex;
+    flex-flow: column;
+}
+
+/* 타이틀 바 */
+.c-school-titlebar {
+    width: 100%;
+    background-image: url('../img/Univ_BackGround_01.png');
+    backdrop-filter: blur(10px);
+    display: flex;
+    background-size: cover;
+    flex-flow: column;
+}
+
+.c-school-titlebar .titlebox {
+    display: flex;
+    flex-flow: column;    
+}
+
+.c-school-titlebar .titlebox .title {
+    color: white;
+    font-size: 5vh;
+    margin: 15vh 0vh 0vh 0vh;
+    filter: drop-shadow(4px 4px 4px #000);
+}
+
+.c-school-titlebar .titlebox .description {
+    color: white;
+    font-size: 3vh;
+    margin: 3vh 0vh 8vh 0vh;
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+}
+
+/* 필터 바 */
+.c-school-iflinebar {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+.c-school-iflinebar .boxtitle {
+    font-size: 4vh !important;
+    
+    color: rgb(127, 182, 255);
+    filter: drop-shadow(0.5px 0.5px 0.5px #000);
+}
+
+.c-school-iflinebar .box {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    gap: 5px;
+}
+
+
+.c-school-iflinebar .box .buttons {
+    transition: all 0.5s;
+    background-color: #7a7a7a;
+    font-size: 1vh;
+
+    border-style: solid;
+    border-color: white;
+    border-radius: 10px;
+    /* border-width: 0px 3px 0px 0px ; */
+
+    width: 20%;
+    height: 20vh;
+    cursor: pointer;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: black;
+
+    opacity: 0.5;
+}
+
+.c-school-iflinebar .box .buttons:hover {
+    opacity: 1;
+}
+
+.c-school-iflinebar .box img {
+    width: 5vw;
+}
+
+.c-school-iflinebar .box .title {
+    font-size: 1.5vw;
+    font-weight: bold;
+    margin: 1vh;
+}
+
+.c-school-iflinebar .box .selection {
+    background-color: rgb(127, 182, 255);
+    color: white;
+    opacity: 1;
+}
+
+/* 대학 목록 바 */
+.c-school-univlistbar {
+    display: flex;
+    flex-flow: column;
+    margin: 5vh 0vh;
+}
+
+.c-school-univlistbar .Horizontal {
+    display: flex;
+    flex-flow: row;
+    gap: 1vw;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    justify-content: center;
+}
+
+.c-school-univlistbar .Horizontal .Item{
+    display: flex;
+    flex-flow: column;
+    transition: all 0.5s;
+    /* transition: background-image 0.5s ease-in-out; */
+
+    width: 15vw;
+    height: 35vh;
+
+    margin: 20px;
+    padding: 0px 0px 20px 0px;
+
+    border-radius: 10px;
+    /* background-color: white; */
+    color: black;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
+.c-school-univlistbar .Horizontal .isnotdongguk{
+    background-color: white;
+}
+
+.c-school-univlistbar .Horizontal .isnotdongguk:hover{
+    background-color: rgba(179, 224, 255, 0.317);
+    /* animation: jittery 4s infinite; */
+}
+
+.c-school-univlistbar .Horizontal .isdongguk{
+    background-color: white;
+    /* animation: jittery 4s infinite; */
+}
+
+.c-school-univlistbar .Horizontal .isdongguk:hover{
+    background-color: rgba(255, 222, 161, 0.719);
+    /* background-image: linear-gradient(#e66465, #9198e5); */
+    width: 16vw;
+    height: 36vh;
+    box-shadow: 0px 0px 15px 0px rgba(1, 1, 1, 1);
+}
+
+.c-school-univlistbar .Horizontal .Item img {
+    height: 16vh;
+    width: 16vh;
+    margin: auto;
+    /* margin-top: 3vh; */
+}
+
+.c-school-univlistbar .Horizontal .Item .UnivName {
+    color: black;
+    margin: 2vh;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.c-school-univlistbar .Horizontal .Item .UnivDepertment {
+    color: #777;
+    font-size: 1.5vh;
+    line-height: 2.5vh;
+}
