@@ -23,8 +23,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-/*
-tasks.named('test') {
-	useJUnitPlatform()
+tasks.named('jar') {
+	enabled = false
 }
-*/
+
+tasks.named('bootJar') {
+	archiveFileName = 'backend-app.jar'
+}

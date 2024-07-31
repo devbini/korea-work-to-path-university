@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 
 // ref
-import DepartmentComponent from './1_1_departmentcomponent.js';
+import DepartmentComponent from './1-2_departmentcomponent.js';
 
 const { kakao } = window;
 
