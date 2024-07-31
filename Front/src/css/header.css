@@ -1,0 +1,89 @@
+/* 네비게이션 바 스타일 시작 */
+
+nav {
+    transition: all 0.5s;
+}
+
+.c-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    z-index: 100000;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    color: rgb(192, 192, 192);
+}
+
+.c-nav-fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    z-index: 100000;
+    background-color: white !important;
+    backdrop-filter: blur(0px) !important;
+    color: black !important;
+}
+
+.c-nav-div {
+    width: 60%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.c-nav-logo {
+    flex: 1 0 auto;
+    height: 100%;
+    text-align: left;
+    transition: all 0.5s;
+}
+
+.c-nav-logoimage {
+    transition: all 0.5s;
+    height: 90%;
+    margin: 1%;
+    cursor: pointer;
+}
+
+.c-nav-content {
+    flex: 2 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.c-nav-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    list-style-type: none;
+}
+
+.c-nav-item {
+    cursor: pointer;
+    flex: 1 0 auto;
+    font-weight: 650;
+    font-size: 2vh;
+    transition: all 0.2s;
+}
+
+.c-nav-item:hover {
+    color: rgb(255, 145, 0);
+}
+
+/* 네비게이션 바 종료 */
