@@ -5,7 +5,7 @@ pipeline {
         stage('Build Front') {
             steps {
                 script {
-                    timeout(time: 5, unit: 'MINUTES') {
+                    timeout(time: 10, unit: 'MINUTES') {
                         // Frontend 서비스 빌드
                         sh 'docker-compose build frontend'
                     }
