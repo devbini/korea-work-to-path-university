@@ -2,22 +2,47 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Front') {
             steps {
                 script {
-                    sh 'docker-compose build'
+                    timeout(time: 5, unit: 'MINUTES') {
+                        // Frontend 서비스 빌드
+                        sh 'docker-compose build frontend'
+                    }
                 }
             }
         }
 
-        stage('Deploy') {
+        // Back 빌드 단계
+        // stage('Build Back') {
+        //     steps {
+        //         script {
+        //             // Backend 서비스 빌드
+        //             sh 'docker-compose build backend'
+        //         }
+        //     }
+        // }
+
+        stage('Deploy Front') {
             steps {
                 script {
-                    sh 'docker-compose down'
-                    sh 'docker-compose up -d'
+                    // Frontend 서비스 배포
+                    sh 'docker-compose stop frontend'
+                    sh 'docker-compose up -d frontend'
                 }
             }
         }
+
+        // Back 배포 단계
+        // stage('Deploy Back') {
+        //     steps {
+        //         script {
+        //             // Backend 서비스 배포
+        //             sh 'docker-compose stop backend'
+        //             sh 'docker-compose up -d backend'
+        //         }
+        //     }
+        // }
     }
 
     post {
@@ -29,7 +54,7 @@ pipeline {
             echo 'Deployment was successful!'
         }
         failure {
-            echo 'Deployment failed...hh'
+            echo 'Deployment failed...'
         }
     }
 }
