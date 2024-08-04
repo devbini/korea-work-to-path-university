@@ -15,16 +15,4 @@ public class WpuApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WpuApplication.class, args);
 	}
-
-	@GetMapping("/testa")
-	public Map<String, Object> F_Controller()
-	{
-		Map<String, Object> firstData = new HashMap<>();
-
-		firstData.put("label1", "check1");
-		firstData.put("label2", "check2");
-		firstData.put("label3", "check3");
-
-		return firstData;
-	}
 }
