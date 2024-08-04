@@ -21,6 +21,10 @@ RUN chmod +x gradlew
 # 빌드
 RUN ./gradlew build
 
+# [DEBUG] 빌드 후 폴더 검사...
+RUN ls -al build/libs
+RUN ls -al build
+
 # 결과 파일 복사
 COPY build/libs/*.jar /app/backend.jar
 
