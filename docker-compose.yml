@@ -5,7 +5,7 @@ services:
     build:
       context: ./Front
     ports:
-      - "80:80"
+      - "3000:3000"
     container_name: frontend-container
     env_file:
       - /home/importent/.env
