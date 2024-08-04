@@ -4,6 +4,9 @@ FROM openjdk:17-jdk
 # 작업 폴더 설정
 WORKDIR /app
 
+# xargs 설치
+RUN apt-get update && apt-get install -y findutils
+
 # 빌드 파일 복사
 COPY gradlew .
 COPY gradlew.bat .
