@@ -22,12 +22,15 @@ pipeline {
             }
         }
 
-
         // Front 배포 단계 🚀
         stage('Deploy Front') {
             steps {
                 script {
-                    sh 'docker-compose down frontend'
+                    // Frontend 서비스가 실행 중인지 확인
+                    if (sh(script: 'docker-compose ps -q frontend', returnStdout: true).trim()) {
+                        sh 'docker-compose stop frontend'  // Frontend 중지
+                        sh 'docker-compose rm -f frontend' // 컨테이너 삭제
+                    }
                     sh 'docker-compose up --build -d frontend'
                 }
             }
@@ -37,7 +40,11 @@ pipeline {
         stage('Deploy Back') {
             steps {
                 script {
-                    sh 'docker-compose down backend'
+                    // Backend 서비스가 실행 중인지 확인
+                    if (sh(script: 'docker-compose ps -q backend', returnStdout: true).trim()) {
+                        sh 'docker-compose stop backend'  // Backend 중지
+                        sh 'docker-compose rm -f backend' // 컨테이너 삭제
+                    }
                     sh 'docker-compose up --build -d backend'
                 }
             }
