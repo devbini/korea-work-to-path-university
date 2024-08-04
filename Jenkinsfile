@@ -26,10 +26,10 @@ pipeline {
         stage('Deploy Front') {
             steps {
                 script {
-                    // Frontend 서비스가 실행 중인지 확인
-                    if (sh(script: 'docker-compose ps -q frontend', returnStdout: true).trim()) {
-                        sh 'docker-compose stop frontend'  // Frontend 중지
-                        sh 'docker-compose rm -f frontend' // 컨테이너 삭제
+                    def frontendRunning = sh(script: 'docker-compose ps -q frontend', returnStatus: true) == 0
+                    if (frontendRunning) {
+                        sh 'docker-compose stop frontend'
+                        sh 'docker-compose rm -f frontend'
                     }
                     sh 'docker-compose up --build -d frontend'
                 }
@@ -40,10 +40,10 @@ pipeline {
         stage('Deploy Back') {
             steps {
                 script {
-                    // Backend 서비스가 실행 중인지 확인
-                    if (sh(script: 'docker-compose ps -q backend', returnStdout: true).trim()) {
-                        sh 'docker-compose stop backend'  // Backend 중지
-                        sh 'docker-compose rm -f backend' // 컨테이너 삭제
+                    def backendRunning = sh(script: 'docker-compose ps -q backend', returnStatus: true) == 0
+                    if (backendRunning) {
+                        sh 'docker-compose stop backend'
+                        sh 'docker-compose rm -f backend'
                     }
                     sh 'docker-compose up --build -d backend'
                 }
