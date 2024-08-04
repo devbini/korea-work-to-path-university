@@ -4,8 +4,8 @@ FROM openjdk:17-jdk-alpine
 # 작업 폴더 설정
 WORKDIR /app
 
-# xargs 설치
-RUN apk update && apk add findutils
+# 필요한 패키지 설치
+RUN apk update && apk add findutils coreutils
 
 # 빌드 파일 복사
 COPY gradlew .
@@ -24,6 +24,9 @@ RUN ./gradlew build
 # [DEBUG] 빌드 후 폴더 검사...
 RUN ls -al build/libs
 RUN ls -al build
+
+# [DEBUG] 빌드된 JAR 파일의 절대 경로 확인
+RUN realpath build/libs/backend-app.jar
 
 # 결과 파일 복사
 COPY build/libs/*.jar /app/backend.jar
