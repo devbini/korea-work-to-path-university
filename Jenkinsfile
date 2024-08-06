@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy Front') {
             steps {
                 script {
-                    def frontendRunning = sh(script: 'docker-compose ps -q frontend', returnStatus: true) == 0
+                    def frontendRunning = sh(script: 'docker-compose ps -q frontend', returnStdout: true).trim()
                     if (frontendRunning) {
                         sh 'docker-compose stop frontend'
                         sh 'docker-compose rm -f frontend'
@@ -40,7 +40,7 @@ pipeline {
         stage('Deploy Back') {
             steps {
                 script {
-                    def backendRunning = sh(script: 'docker-compose ps -q backend', returnStatus: true) == 0
+                    def backendRunning = sh(script: 'docker-compose ps -q backend', returnStdout: true).trim()
                     if (backendRunning) {
                         sh 'docker-compose stop backend'
                         sh 'docker-compose rm -f backend'
