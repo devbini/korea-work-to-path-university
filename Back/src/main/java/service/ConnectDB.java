@@ -12,8 +12,8 @@ public class ConnectDB {
         Connection con = null;
 
         Dotenv dotenv = Dotenv.configure()
-                              .directory("/home/importent/")
-//                              .directory("C:\\importent")
+                             .directory("/home/importent/")
+                            //   .directory("C:\\importent")
                               .load();
 
         String SERVER = dotenv.get("DB_SERVER");
@@ -21,13 +21,13 @@ public class ConnectDB {
         String PASSWORD = dotenv.get("DB_PASSWORD");
 
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        
         try{
-            con = DriverManager.getConnection("jdbc:mysql://"+ SERVER + "/" + "mydb?useSSL=false&allowPublicKeyRetrieval=true",USER_NAME,PASSWORD);
+            con = DriverManager.getConnection("jdbc:mysql://"+ SERVER + "/" + "kwpu?useSSL=false&allowPublicKeyRetrieval=true",USER_NAME,PASSWORD);
         }catch(SQLException e){
             e.printStackTrace();
         }
