@@ -13,6 +13,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @RestController
 public class restfulapi {
 
+    @CrossOrigin
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String TEST() {
+        return "Connect-Test";
+    }
+
     // 학교 목록 제공
     @CrossOrigin
     @RequestMapping(value = "/schoollist", method = RequestMethod.GET)
