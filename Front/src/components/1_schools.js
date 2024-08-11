@@ -30,9 +30,10 @@ function Schoolcomponent() {
     SetBackGround(backFiles);
 
     axios
-      .get("http://13.209.244.201:8080/schoolliststring")
+      .get("http://kwpu.co.kr:9091/api/schools/list")
       .then((response) => {
-        setUniversities(response.data.UNIV);
+        console.log(response.data);
+        setUniversities(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -53,14 +54,10 @@ function Schoolcomponent() {
   };
 
   const filteredUniversities = universities.filter(university => {
-
-    console.log(selectedSector);
-    console.log(university);
-
     if (selectedSector === 0) {
       return true; // 모든 대학을 보여줌
     } else {
-      return university.SECTOR === selectedSector.toString(); // 선택된 섹터와 일치하는 대학만 보여줌
+      return university.UNIV_CODE === selectedSector; // 선택된 섹터와 일치하는 대학만 보여줌
     }
   });
 
@@ -135,7 +132,7 @@ function Schoolcomponent() {
 
 function UniversityItem({ university, logoimages, backgroundimages, handleItemClick, handleClosePopup, selectedItemId }) {
   
-  const departmentArray = university.DEPARTMENT.split(',');
+  const departmentArray = "임시 삭제";
   const displayedDepartments = departmentArray.slice(0, 3);
   const remainingDepartmentsCount = Math.max(0, 3 - departmentArray.length);
   
@@ -145,12 +142,12 @@ function UniversityItem({ university, logoimages, backgroundimages, handleItemCl
 
   return (
     <div id={university.INDEX}>
-      <div className={`Item ${university.NAME === '동국대학교' ? 'isdongguk' : 'isnotdongguk'}`} onClick={() => handleItemClick(university.INDEX)}>
+      <div className={`Item ${university.UNIV_NAME === '동국대학교' ? 'isdongguk' : 'isnotdongguk'}`} onClick={() => handleItemClick(university.INDEX)}>
         <img className={`UnivLOGO`} src={logoimages[university.INDEX - 1]} alt="디버그"></img>
-        <span className="UnivName">{university.NAME}</span>
-        {displayedDepartmentsWithPlaceholder.map((department, index) => (
+        <span className="UnivName">{university.UNIV_NAME}</span>
+        {/* {displayedDepartmentsWithPlaceholder.map((department, index) => (
           <span key={index} className="UnivDepertment">{department}</span>
-        ))}
+        ))} */}
       </div>
 
       {selectedItemId === university.INDEX && (
