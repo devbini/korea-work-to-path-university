@@ -12,8 +12,8 @@ public class ConnectDB {
         Connection con = null;
 
         Dotenv dotenv = Dotenv.configure()
-                             .directory("/home/importent/")
-                            //   .directory("C:\\importent")
+                              .directory("/home/importent")
+//                              .directory("C:\\importent")
                               .load();
 
         String SERVER = dotenv.get("DB_SERVER");
