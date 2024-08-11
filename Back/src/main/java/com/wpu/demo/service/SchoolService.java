@@ -1,4 +1,6 @@
-package service;
+package com.wpu.demo.service;
+
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class SchoolService {
     public List<String> getSchoolList() {
         List<String> schools = new ArrayList<>();

@@ -1,11 +1,13 @@
-package service;
+package com.wpu.demo.service;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Service
 public class ConnectDB {
     public static Connection Create_Connection()
     {

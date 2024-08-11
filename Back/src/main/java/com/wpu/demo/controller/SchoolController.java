@@ -1,8 +1,8 @@
-package com.wpu.demo;
+package com.wpu.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.SchoolService;
+import com.wpu.demo.service.SchoolService;
 
 import java.util.List;
 
