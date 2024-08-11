@@ -11,8 +11,10 @@ import java.util.List;
 
 @Service
 public class SchoolService {
-    public List<String> getSchoolList() {
-        List<String> schools = new ArrayList<>();
+    public String getSchoolList() {
+        StringBuilder jsonArray = new StringBuilder();
+        jsonArray.append("[");
+
         Connection con = ConnectDB.Create_Connection();
         Statement stmt = null;
         ResultSet rs = null;
@@ -33,8 +35,12 @@ public class SchoolService {
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                schools.add(rs.getString("json_result"));
+                if (jsonArray.length() > 1) {
+                    jsonArray.append(",");
+                }
+                jsonArray.append(rs.getString("json_result"));
             }
+            jsonArray.append("]");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -47,6 +53,6 @@ public class SchoolService {
             }
         }
 
-        return schools;
+        return jsonArray.toString();
     }
 }
