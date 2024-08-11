@@ -19,7 +19,7 @@ public class SchoolController {
 
     @CrossOrigin
     @GetMapping("/list")
-    public List<String> getSchoolList() {
+    public String getSchoolList() {
         return schoolService.getSchoolList();
     }
 
