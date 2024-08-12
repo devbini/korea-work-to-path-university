@@ -3,12 +3,14 @@ import React, { useEffect, useState, useCallback } from "react";
 
 // ref
 import DepartmentComponent from './1-2_departmentcomponent.js';
+import axios from "axios";
 
 const { kakao } = window;
 
 const Popup = ({ university, handleClose, logoimages, background }) => {
   
   // 학과목록
+  const [univ_info, setUniv_info] = useState([]);
   const [departmentdata, setdepartmentdata] = useState([]); 
   const [MapRef, setMap] = useState();
 
@@ -21,11 +23,19 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
   }, [university]);
 
   useEffect (() => {
-    // 초기 로드 시에도 fetchData 함수를 실행합니다.
     fetchData();
   }, [fetchData]);
 
   useEffect(() => {
+    axios
+    .get("http://kwpu.co.kr:9091/api/schools/schoollist?school_id=" + university.INDEX)
+    .then((response) => {
+      setUniv_info(response.data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
     const container = document.getElementById('map');
     const options = {
       center: new kakao.maps.LatLng(33.45, 126.57),
@@ -65,7 +75,7 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
             <div className="top-emblumBack"> <img className="top-emblum" src={logoimages} alt="Logo"></img></div>
             <div className="top-titlebar">
               <span className="top-title">{university.NAME}</span><br />
-              <span className="top-slogan">{university.SLOGEN}</span>
+              <span className="top-slogan">{univ_info.SLOGEN}</span>
             </div>
           </div>
 
@@ -78,7 +88,7 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
                   <span>입학처<br />졸업요건<br />시간표<br />교환학생<br />복수전공<br />학교 위치</span>
                 </div>
                 <div className="middlebox-right">
-                  <span><a href={university.URL} target="blank">{university.URL}</a><br />{university.ENDIF}<br />{university.FREETIME},
+                  <span><a href={univ_info.ADMISSIONURL} target="blank">{univ_info.ADMISSIONURL}</a><br />{university.ENDIF}<br />{university.FREETIME},
                   {university.WEEKEND}, {university.SATSUN}<br />{university.TR}<br />{university.MULTI}<br />{university.ADDRESS}</span>
                   <div id="map" className="kakaomap"></div>
                 </div>

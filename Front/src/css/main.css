@@ -52,6 +52,11 @@ figure {
     font-weight: 600;
 }
 
+#c-sector .item .cont .inbuttonsinfo {
+    display: flex;
+    gap: 10px;
+}
+
 #c-sector .item .img_box {
     /* overflow: hidden; */
     position: relative;

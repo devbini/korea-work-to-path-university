@@ -24,6 +24,19 @@ public class SchoolController {
     }
 
     @CrossOrigin
+    @GetMapping("/schoolinfo")
+    public String getSchoolList(@RequestParam(required = false) Integer school_id) {
+        return schoolService.getSchoolinfo(school_id);
+    }
+
+    @CrossOrigin
+    @GetMapping("/department")
+    public String getDepartmentList(@RequestParam(required = false) Integer school_id) {
+        return schoolService.getdepartment(school_id);
+    }
+
+
+    @CrossOrigin
     @GetMapping("/")
     public String testConnection() {
         return "School-Connect-Test";
