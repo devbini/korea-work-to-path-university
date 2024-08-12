@@ -160,10 +160,10 @@ function Maincomponent() {
                 <figcaption className="tit">How?<span>특성화고졸 재직자전형</span></figcaption>
                 <div className="intextinfo">직장 경력이 3년 이상인 특성화고졸자를 대상으로 하는 기회전형입니다.<br />
                   3년 이상의 고용보험 이력이 있으면 누구든지 도전할 수 있습니다.</div>
-                <maaa>
-                <a className="abox" href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B3%A0%EB%93%B1%EA%B5%90%EC%9C%A1%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9/%EC%A0%9C29%EC%A1%B0" target="_blank" rel="noreferrer">관련 법률 📌</a>
-                <la className="abox" onClick={goToEmployment} target="_blank" rel="noreferrer">재직일 계산 ▶</la>
-                </maaa>
+                <div className="inbuttonsinfo">
+                  <a className="abox" href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B3%A0%EB%93%B1%EA%B5%90%EC%9C%A1%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9/%EC%A0%9C29%EC%A1%B0" target="_blank" rel="noreferrer">관련 법률 📌</a>
+                  <div className="abox" onClick={goToEmployment} target="_blank" rel="noreferrer">재직일 계산 ▶</div>
+                </div>
               </div>
             </figure>
           </article>

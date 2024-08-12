@@ -131,23 +131,18 @@ function Schoolcomponent() {
 }
 
 function UniversityItem({ university, logoimages, backgroundimages, handleItemClick, handleClosePopup, selectedItemId }) {
-  
-  const departmentArray = "임시 삭제";
-  const displayedDepartments = departmentArray.slice(0, 3);
-  const remainingDepartmentsCount = Math.max(0, 3 - departmentArray.length);
-  
-  const displayedDepartmentsWithPlaceholder = displayedDepartments.concat(
-    Array(remainingDepartmentsCount).fill("ㅤ")
-  );
+  const departments = university.DEPARTMENT ? university.DEPARTMENT.split(',') : [];
+  const displayedDepartments = departments.slice(0, 3);
+  const departmentsToDisplay = [...displayedDepartments, ...Array(3 - displayedDepartments.length).fill('\u200B')];
 
   return (
     <div id={university.INDEX}>
       <div className={`Item ${university.UNIV_NAME === '동국대학교' ? 'isdongguk' : 'isnotdongguk'}`} onClick={() => handleItemClick(university.INDEX)}>
         <img className={`UnivLOGO`} src={logoimages[university.INDEX - 1]} alt="디버그"></img>
         <span className="UnivName">{university.UNIV_NAME}</span>
-        {/* {displayedDepartmentsWithPlaceholder.map((department, index) => (
-          <span key={index} className="UnivDepertment">{department}</span>
-        ))} */}
+        {departmentsToDisplay.map((department, index) => (
+        <span key={index} className="UnivDepartment">{department}</span>
+        ))}
       </div>
 
       {selectedItemId === university.INDEX && (
