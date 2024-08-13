@@ -26,6 +26,12 @@
     z-index: 1001;
     overflow: scroll;
     overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.popup::-webkit-scrollbar {
+    display: none;
 }
 
 .popup-inner {
