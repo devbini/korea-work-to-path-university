@@ -1,5 +1,5 @@
 //import { computeHeadingLevel } from "@testing-library/react";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
 // ref
 import DepartmentComponent from './1-2_departmentcomponent.js';
@@ -12,25 +12,35 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
   // 학과목록
   const [univ_info, setUniv_info] = useState([]);
   const [departmentdata, setdepartmentdata] = useState([]); 
+  const [entrance, setentrance] = useState([]); 
   const [MapRef, setMap] = useState();
 
-  const fetchData = useCallback(async () => {
-    try {
-      setdepartmentdata([university.DEPARTMENT]);
-    }catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }, [university]);
-
-  useEffect (() => {
-    fetchData();
-  }, [fetchData]);
+  // const api_root = "localhost:8080";
+  const api_root = "kwpu.co.kr:9091";
 
   useEffect(() => {
     axios
-    .get("http://kwpu.co.kr:9091/api/schools/schoollist?school_id=" + university.INDEX)
+    .get("http://" + api_root + "/api/schools/schoolinfo?school_id=" + university.INDEX)
     .then((response) => {
-      setUniv_info(response.data);
+      setUniv_info(response.data[0]);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+    axios
+    .get("http://" + api_root + "/api/schools/departmentinfo?school_id=" + university.INDEX)
+    .then((response) => {
+      setdepartmentdata(response.data[0]);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+    axios
+    .get("http://" + api_root + "/api/schools/entranceinfo?school_id=" + university.INDEX)
+    .then((response) => {
+      setentrance(response.data[0]);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -42,27 +52,33 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
       level: 3
     };
     const map = new kakao.maps.Map(container, options);
-    console.log(map);
     setMap(map);
 
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(university.ADDRESS, function(result, status) {
+    geocoder.addressSearch(univ_info.ADDRESS, function(result, status) {
       // 정상적으로 검색이 완료됐으면   
        if (status === kakao.maps.services.Status.OK) {
-        console.log(map);
-
           var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
           map.panTo(coords);
       } 
     });    
   }, [])
   
 
-
+  function renderMultiValue(multiValue) {
+    switch (Number(multiValue)) {
+      case 0:
+        return "복수전공 불가능";
+      case 1:
+        return "복수전공 가능 (동일 전형)";
+      case 2:
+        return "주간대학 복수전공 가능";
+      default:
+        return "-";
+    }
+  }
 
 
 
@@ -74,7 +90,7 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
             <img className="top-background" src={background} alt="백그라운드"></img>
             <div className="top-emblumBack"> <img className="top-emblum" src={logoimages} alt="Logo"></img></div>
             <div className="top-titlebar">
-              <span className="top-title">{university.NAME}</span><br />
+              <span className="top-title">{univ_info.UNIV_NAME}</span><br />
               <span className="top-slogan">{univ_info.SLOGEN}</span>
             </div>
           </div>
@@ -88,15 +104,42 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
                   <span>입학처<br />졸업요건<br />시간표<br />교환학생<br />복수전공<br />학교 위치</span>
                 </div>
                 <div className="middlebox-right">
-                  <span><a href={univ_info.ADMISSIONURL} target="blank">{univ_info.ADMISSIONURL}</a><br />{university.ENDIF}<br />{university.FREETIME},
-                  {university.WEEKEND}, {university.SATSUN}<br />{university.TR}<br />{university.MULTI}<br />{university.ADDRESS}</span>
+                  <span><a href={univ_info.ADMISSION_URL} target="blank">{univ_info.ADMISSION_URL}</a><br />
+                  {university.GRADUATION && university.GRADUATION.split(',').length === 3 ? (
+                    <div>
+                      논문 {university.GRADUATION.split(',')[0]} | 학점 {university.GRADUATION.split(',')[1]} | 시험 {university.GRADUATION.split(',')[2]}
+                    </div>
+                  ) : (
+                    <div>정보가 부족해요!</div>
+                  )}
+                  {university.SCADULE && university.SCADULE.split(',').length === 2 ? (
+                    <div>
+                      주간수업 필수여부 {university.SCADULE.split(',')[0]} | 주말수업 필수여부 {university.SCADULE.split(',')[1]}
+                    </div>
+                  ) : (
+                    <div>정보가 부족해요!</div>
+                  )}
+                  {university.TR ? (
+                    <div>
+                      교환학생 신청 {university.TR}
+                    </div>
+                  ) : (
+                    <div>정보가 부족해요!</div>
+                  )}
+                  {university.MULTI ? (
+                    <div>
+                       {renderMultiValue(university.MULTI)}
+                    </div>
+                  ) : (
+                    <div>정보가 부족해요!</div>
+                  )}
+                  {univ_info.ADDRESS}</span>
                   <div id="map" className="kakaomap"></div>
                 </div>
               </div>
-
-
-
             </div>
+
+
             <div className="popup-middlebox-mini">
               <span className="popup-titlebar-right">입학 정보</span>
               <div className="popup-mid-line"></div>
@@ -105,8 +148,14 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
                   <span>재직 일수<br />전형<br />평가기준<br /><br />원서료<br />접수기간<br />제출서류</span>
                 </div>
                 <div className="middlebox-right">
-                  <span>{university.WORKDATE}<br />{university.TYPE}<br />{university.STEVA}<br />{university.STEVB}<br />{university.PRICE}<br />
-                  {university.INIT_DATE}<br />{university.FILE}</span>
+                  <span>
+                    {entrance.WORKDATE}<br />
+                    {entrance.TYPE}<br />
+                    {entrance.STEVA}<br />
+                    {entrance.STEVB}<br />
+                    {entrance.PRICE}<br />
+                    {entrance.INIT_DATE}<br />
+                    {entrance.FILE}</span>
                   <div id="map" className="kakaomap"></div>
                 </div>
               </div>
@@ -120,13 +169,12 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
             <div className='b-middle-bot'>
               <span>학과명</span>
               <span>모집인원</span>
-              <span>2024년 입시 경쟁률</span>
-              <span>성적 평균</span>
+              <span>학위명</span>
             </div>
             <div className="popup-items">
             
               {departmentdata.map(data => (
-                <DepartmentComponent/>
+                <DepartmentComponent key={data} departmentinfomation={data}/>
               ))}
             </div>
           </div>

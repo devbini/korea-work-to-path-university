@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import "../css/main.css";
 import "../css/schools.css";
@@ -20,6 +20,9 @@ function Schoolcomponent() {
   const [imageFiles, setImageFiles] = useState([]);
   const [backgroundFiles, SetBackGround] = useState([]);
 
+  // const api_root = "localhost:8080";
+  const api_root = "kwpu.co.kr:9091";
+
   useEffect(() => {
     const images = require.context('../img/University_Logos/', false, /\.(png|jpe?g|svg)$/);
     const Files = images.keys().map(images);
@@ -30,9 +33,8 @@ function Schoolcomponent() {
     SetBackGround(backFiles);
 
     axios
-      .get("http://kwpu.co.kr:9091/api/schools/list")
+      .get("http://" + api_root + "/api/schools/list")
       .then((response) => {
-        console.log(response.data);
         setUniversities(response.data);
       })
       .catch((error) => {
@@ -53,13 +55,15 @@ function Schoolcomponent() {
     setSelectedItemId(null);
   };
 
-  const filteredUniversities = universities.filter(university => {
-    if (selectedSector === 0) {
-      return true; // 모든 대학을 보여줌
-    } else {
-      return university.UNIV_CODE === selectedSector; // 선택된 섹터와 일치하는 대학만 보여줌
-    }
-  });
+  const filteredUniversities = useMemo(() => {
+    return universities.filter(university => {
+      if (selectedSector === 0) {
+        return true;
+      } else {
+        return university.UNIV_CODE === selectedSector;
+      }
+    });
+  }, [universities, selectedSector]);
 
   return (
     <div className="c-school-root">
@@ -118,7 +122,7 @@ function Schoolcomponent() {
       <div className="c-school-univlistbar">
         <div id="ITEMLIST" className="Horizontal">
           {filteredUniversities.map((university, index) => (
-            <div key={index}>
+            <div key={`UnivItemBoxs-${university.INDEX}`}>
               <UniversityItem university={university} logoimages={imageFiles} backgroundimages={backgroundFiles} handleItemClick={handleItemClick} handleClosePopup={handleClosePopup} selectedItemId={selectedItemId} />
             </div>
           ))}
@@ -141,7 +145,7 @@ function UniversityItem({ university, logoimages, backgroundimages, handleItemCl
         <img className={`UnivLOGO`} src={logoimages[university.INDEX - 1]} alt="디버그"></img>
         <span className="UnivName">{university.UNIV_NAME}</span>
         {departmentsToDisplay.map((department, index) => (
-        <span key={index} className="UnivDepartment">{department}</span>
+        <span key={`popup-${university.UNIV_NAME}-${department}#${index}`} className="UnivDepartment">{department}</span>
         ))}
       </div>
 
