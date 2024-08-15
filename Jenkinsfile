@@ -26,11 +26,18 @@ pipeline {
         stage('Deploy Front') {
             steps {
                 script {
-                    def frontendRunning = sh(script: 'docker-compose ps -q frontend', returnStdout: true).trim()
-                    if (frontendRunning) {
-                        sh 'docker-compose stop frontend'
-                        sh 'docker-compose rm -f frontend'
+                    try {
+                        def frontendRunning = sh(script: 'docker-compose ps -q frontend', returnStdout: true).trim()
+                        if (frontendRunning) {
+                            echo "Front Service 찾음! 삭제를 진행합니다."
+                            sh 'docker-compose stop frontend'
+                            sh 'docker-compose rm -f frontend'
+                        }
+                    } catch (Exception e) {
+                        echo "Front-end Service not found !"
                     }
+ 
+                    echo "Front Service 시작! 🚀"
                     sh 'docker-compose up --build -d frontend'
                 }
             }
@@ -40,11 +47,16 @@ pipeline {
         stage('Deploy Back') {
             steps {
                 script {
-                    def backendRunning = sh(script: 'docker-compose ps -q backend', returnStdout: true).trim()
-                    if (backendRunning) {
-                        sh 'docker-compose stop backend'
-                        sh 'docker-compose rm -f backend'
+                    try {
+                        def backendRunning = sh(script: 'docker-compose ps -q backend', returnStdout: true).trim()
+                        if (backendRunning) {
+                            sh 'docker-compose stop backend'
+                            sh 'docker-compose rm -f backend'
+                        }
+                    } catch (Exception e) {
+                        echo "Back-end Service not found !"
                     }
+
                     sh 'docker-compose up --build -d backend'
                 }
             }
