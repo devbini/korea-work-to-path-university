@@ -50,6 +50,7 @@ pipeline {
                     try {
                         def backendRunning = sh(script: 'docker-compose ps -q backend', returnStdout: true).trim()
                         if (backendRunning) {
+                            echo "Back Service 찾음! 삭제를 진행합니다."
                             sh 'docker-compose stop backend'
                             sh 'docker-compose rm -f backend'
                         }
@@ -57,6 +58,7 @@ pipeline {
                         echo "Back-end Service not found !"
                     }
 
+                    echo "Back Service 시작! 🚀"
                     sh 'docker-compose up --build -d backend'
                 }
             }
