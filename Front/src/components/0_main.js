@@ -57,12 +57,8 @@ function Maincomponent() {
     univlogo3,
     univlogo4,
     univlogo5
-    // univlogo6,
-    // univlogo7,
-    // univlogo8,
   ];
   const [m_UnivLogoIndex, SetUnivLogoIndex] = useState(0);
-  //const [isUp, setIsUp] = useState(true);
   const [opacity, setOpacity] = useState(1);
   //#endregion
 
