@@ -13,46 +13,44 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
   const [univ_info, setUniv_info] = useState([]);
   const [departmentdata, setdepartmentdata] = useState([]); 
   const [entrance, setentrance] = useState([]); 
-  const [MapRef, setMap] = useState();
+  // const [MapRef, setMap] = useState();
 
-  // const api_root = "localhost:8080";
-  const api_root = "kwpu.co.kr:9091";
+  const api_root = window.location.protocol === 'https:' ? 'https://kwpu.co.kr:443' : 'http://kwpu.co.kr:9091';
 
   useEffect(() => {
-    axios
-    .get("http://" + api_root + "/api/schools/schoolinfo?school_id=" + university.INDEX)
-    .then((response) => {
-      setUniv_info(response.data[0]);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    const fetchData = async () => {
+      try {
+        const [schoolInfo, departmentInfo, entranceInfo] = await Promise.all([
+          axios.get(
+            `${api_root}/api/schools/schoolinfo?school_id=${university.INDEX}`
+          ),
+          axios.get(
+            `${api_root}/api/schools/departmentinfo?school_id=${university.INDEX}`
+          ),
+          axios.get(
+            `${api_root}/api/schools/entranceinfo?school_id=${university.INDEX}`
+          ),
+        ]);
 
-    axios
-    .get("http://" + api_root + "/api/schools/departmentinfo?school_id=" + university.INDEX)
-    .then((response) => {
-      setdepartmentdata(response.data[0]);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+        setUniv_info(schoolInfo.data[0]);
+        setdepartmentdata(departmentInfo.data[0]);
+        setentrance(entranceInfo.data[0]);
+      } catch (error) {
+        console.error("Error fetching :", error);
+      }
+    };
 
-    axios
-    .get("http://" + api_root + "/api/schools/entranceinfo?school_id=" + university.INDEX)
-    .then((response) => {
-      setentrance(response.data[0]);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    fetchData();
+  }, [university.INDEX, api_root]);
 
+  useEffect(() => {
     const container = document.getElementById('map');
     const options = {
       center: new kakao.maps.LatLng(33.45, 126.57),
       level: 3
     };
     const map = new kakao.maps.Map(container, options);
-    setMap(map);
+    // setMap(map);
 
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
@@ -64,7 +62,7 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
           map.panTo(coords);
       } 
     });    
-  }, [])
+  }, [univ_info.ADDRESS])
   
 
   function renderMultiValue(multiValue) {
