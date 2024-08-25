@@ -20,8 +20,6 @@ function Schoolcomponent() {
   const [imageFiles, setImageFiles] = useState([]);
   const [backgroundFiles, SetBackGround] = useState([]);
 
-  const api_root = window.location.protocol === 'https:' ? 'https://kwpu.co.kr:443' : 'http://kwpu.co.kr:9091';
-
   useEffect(() => {
     const images = require.context('../img/University_Logos/', false, /\.(png|jpe?g|svg)$/);
     const Files = images.keys().map(images);
@@ -32,14 +30,14 @@ function Schoolcomponent() {
     SetBackGround(backFiles);
 
     axios
-      .get(api_root + "/api/schools/list")
+      .get("https://kwpu.co.kr/api/schools/list")
       .then((response) => {
         setUniversities(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [api_root]);
+  }, []);
 
   const handleSectorClick = (sectorId) => {
     setSelectedSector(sectorId);
