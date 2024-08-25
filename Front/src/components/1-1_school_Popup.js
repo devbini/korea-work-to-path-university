@@ -12,36 +12,45 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
   // 학과목록
   const [univ_info, setUniv_info] = useState([]);
   const [departmentdata, setdepartmentdata] = useState([]); 
-  const [entrance, setentrance] = useState([]); 
+  // const [entrance, setentrance] = useState([]); 
   // const [MapRef, setMap] = useState();
-
-  const api_root = window.location.protocol === 'https:' ? 'https://kwpu.co.kr:443' : 'http://kwpu.co.kr:9091';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [schoolInfo, departmentInfo, entranceInfo] = await Promise.all([
+        const [schoolInfo, departmentInfo] = await Promise.all([
           axios.get(
-            `${api_root}/api/schools/schoolinfo?school_id=${university.INDEX}`
+            `https://kwpu.co.kr/api/schools/schoolinfo?school_id=${university.INDEX}`
           ),
           axios.get(
-            `${api_root}/api/schools/departmentinfo?school_id=${university.INDEX}`
+            `https://kwpu.co.kr/api/schools/department?school_id=${university.INDEX}`
           ),
-          axios.get(
-            `${api_root}/api/schools/entranceinfo?school_id=${university.INDEX}`
-          ),
+          // axios.get(
+          //   `https://kwpu.co.kr/api/schools/admission?school_id=${university.INDEX}`
+          // ),
         ]);
 
         setUniv_info(schoolInfo.data[0]);
-        setdepartmentdata(departmentInfo.data[0]);
-        setentrance(entranceInfo.data[0]);
+        const departmentData = departmentInfo.data;
+        const departmentArray = departmentData.DEPARTMENT.split(',');
+        const recruitedArray = departmentData.DEPARTMENT_RECRUITED.split(',');
+        const degreeArray = departmentData.DEPARTMENT_DEGREE.split(',');
+
+        const formattedDepartments = departmentArray.map((dept, index) => ({
+          department: dept,
+          recruited: recruitedArray[index],
+          degree: degreeArray[index],
+        }));
+
+        setdepartmentdata(formattedDepartments);
+
       } catch (error) {
         console.error("Error fetching :", error);
       }
     };
 
     fetchData();
-  }, [university.INDEX, api_root]);
+  }, [university.INDEX]);
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -77,8 +86,6 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
         return "-";
     }
   }
-
-
 
   return (
     <div className="popup-overlay">
@@ -147,13 +154,14 @@ const Popup = ({ university, handleClose, logoimages, background }) => {
                 </div>
                 <div className="middlebox-right">
                   <span>
-                    {entrance.WORKDATE}<br />
+                    {/* {entrance.WORKDATE}<br />
                     {entrance.TYPE}<br />
                     {entrance.STEVA}<br />
                     {entrance.STEVB}<br />
                     {entrance.PRICE}<br />
                     {entrance.INIT_DATE}<br />
-                    {entrance.FILE}</span>
+                    {entrance.FILE} */}
+                  </span>
                   <div id="map" className="kakaomap"></div>
                 </div>
               </div>

@@ -35,7 +35,6 @@ public class SchoolController {
         return schoolService.getdepartment(school_id);
     }
 
-
     @CrossOrigin
     @GetMapping("/")
     public String testConnection() {
