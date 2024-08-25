@@ -102,7 +102,8 @@ public class SchoolService {
     public String getdepartment(Integer school_num) {
         if (school_num == null || school_num == 0) return "ID ERROR";
 
-        String result = "";
+        StringBuilder jsonArray = new StringBuilder();
+        jsonArray.append("[");
 
         Connection con = ConnectDB.Create_Connection();
         Statement stmt = null;
@@ -110,12 +111,22 @@ public class SchoolService {
 
         try {
             stmt = con.createStatement();
-            String query = "SELECT department FROM department_tb WHERE `school_id`=" + school_num + ";";
+            String query = "SELECT JSON_OBJECT( " +
+                    "'DEPARTMENT', department, " +
+                    "'DEPARTMENT_RECRUITED', department_recruited, " +
+                    "'DEPARTMENT_DEGREE', department_degree " +
+                    ") AS json_result " +
+                    "FROM department_tb WHERE `school_id`=" + school_num + ";";
+
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                result = rs.getString(1);
+                if (jsonArray.length() > 1) {
+                    jsonArray.append(",");
+                }
+                jsonArray.append(rs.getString("json_result"));
             }
+            jsonArray.append("]");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -128,6 +139,6 @@ public class SchoolService {
             }
         }
 
-        return result;
+        return jsonArray.toString();
     }
 }
